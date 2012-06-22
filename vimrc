@@ -7,12 +7,17 @@ set noswapfile
 set nowritebackup
 set ruler         " show the cursor position all the time
 set showcmd       " display incomplete commands
+set nowrap        " no wrap
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   syntax on
 endif
+
+" pathogen setup
+call pathogen#helptags()
+call pathogen#runtime_append_all_bundles()
 
 filetype plugin indent on
 
@@ -57,6 +62,9 @@ highlight Folded  guibg=#0A0A0A guifg=#9090D0
 " Numbers
 set number
 set numberwidth=5
+
+" Buffers
+nnoremap <leader>b :buffers<cr>:buffer<space>
 
 " Snippets are activated by Shift+Tab
 let g:snippetsEmu_key = "<S-Tab>"

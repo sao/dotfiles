@@ -1,3 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =1
-let g:netrw_dirhist_1='/Users/Silas/.zsh'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/Users/Silas/Development/Clients/steelcase/wp-content/themes/steelcase/scss'
+let g:netrw_dirhist_2='/Users/Silas/Development/Clients/elite'
