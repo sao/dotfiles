@@ -37,6 +37,9 @@ alias migrate="bundle exec rake db:migrate db:test:prepare"
 alias remigrate="bundle exec rake db:migrate db:migrate:redo db:schema:dump db:test:prepare"
 alias remongrate="bundle exec rake mongoid:migrate mongoid:migrate:redo"
 
+# Postgres
+alias pstart="postgres -D /usr/local/pgsql/data"
+
 # Heroku staging
 alias staging='heroku run console --remote staging'
 alias staging-name='echo `basename $PWD`-staging'

@@ -58,13 +58,19 @@ endif
 colorscheme twilight
 highlight NonText guibg=#060606
 highlight Folded  guibg=#0A0A0A guifg=#9090D0
+highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE
 
-" Numbers
 set number
 set numberwidth=5
 
 " Buffers
 nnoremap <leader>b :buffers<cr>:buffer<space>
+
+" File Operations
+noremap <leader>s :update<cr>
+
+" NERDTree
+map <F2> :NERDTreeToggle<cr>
 
 " Snippets are activated by Shift+Tab
 let g:snippetsEmu_key = "<S-Tab>"
@@ -107,3 +113,7 @@ let g:html_indent_tags = 'li\|p'
 " Improve syntax highlighting
 au BufRead,BufNewFile Gemfile set filetype=ruby
 au BufRead,BufNewFile *.md set filetype=markdown
+
+" Highlight status bar in red while in insert mode
+au InsertEnter * hi StatusLine gui=italic,underline guibg=Red
+au InsertLeave * hi StatusLine gui=italic,underline guibg=#303030
