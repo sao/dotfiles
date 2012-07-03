@@ -3,7 +3,7 @@
 [format]
   pretty = %Cblue%h%Creset %Cgreen[%ar]%Creset (%an) %s
 [user]
-	name = Silas Sao
+  name = Silas Sao
   email = silassao@gmail.com
 [color]
   branch = auto
