@@ -25,3 +25,5 @@
   added = yellow
   changed = green
   untracked = cyan
+[heroku]
+	account = personal

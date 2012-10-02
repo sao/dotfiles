@@ -24,7 +24,7 @@ alias be="bundle exec"
 alias bake="bundle exec rake"
 
 # Tests and Specs
-alias t="ruby -I test"
+# alias t="ruby -I test"
 alias s="bundle exec rspec"
 alias cuc="bundle exec cucumber"
 
@@ -36,6 +36,9 @@ alias giv="gem install -v"
 alias migrate="bundle exec rake db:migrate db:test:prepare"
 alias remigrate="bundle exec rake db:migrate db:migrate:redo db:schema:dump db:test:prepare"
 alias remongrate="bundle exec rake mongoid:migrate mongoid:migrate:redo"
+
+# Compass
+alias compass-init="compass create . --sass-dir \"scss\" --css-dir \"css\" --javascripts-dir \"js\""
 
 # Postgres
 alias pstart="postgres -D /usr/local/pgsql/data"

@@ -1,11 +1,4 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =9
-let g:netrw_dirhist_1='/Users/Silas/Development/Clients/steelcase/wp-content/themes/steelcase/scss'
-let g:netrw_dirhist_2='/Users/Silas/Development/Clients/elite'
-let g:netrw_dirhist_3='/Users/Silas/Development/Clients/steelcase/wp-content/themes/steelcase'
-let g:netrw_dirhist_4='/Users/Silas/Development/Clients/steelcase/wp-content'
-let g:netrw_dirhist_5='/Users/Silas/Development/Clients/elite'
-let g:netrw_dirhist_6='/Users/Silas/Development/Clients/elite/app/assets/images/layout'
-let g:netrw_dirhist_7='/Users/Silas/Development/Clients/elite'
-let g:netrw_dirhist_8='/Users/Silas/Development/Clients/steelcase/wp-content/themes/steelcase'
-let g:netrw_dirhist_9='/Users/Silas/Development/Clients/techgroup'
+let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_1='/Users/Silas/Dropbox/Development/Personal/first_app'
+let g:netrw_dirhist_2='/Users/Silas/Dropbox/Development/Personal/sample_app'
