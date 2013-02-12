@@ -1,4 +1,7 @@
 let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =2
+let g:netrw_dirhist_cnt =5
 let g:netrw_dirhist_1='/Users/Silas/Dropbox/Development/Personal/first_app'
 let g:netrw_dirhist_2='/Users/Silas/Dropbox/Development/Personal/sample_app'
+let g:netrw_dirhist_3='/Users/Silas/Dropbox/Development/Ruby/sc-scraper'
+let g:netrw_dirhist_4='/Users/Silas/Dropbox/Development/Ruby/ais-dmv'
+let g:netrw_dirhist_5='/Users/Silas/Dropbox/Development/Clients/ais-data'
