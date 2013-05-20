@@ -7,6 +7,11 @@ fpath=(~/.zsh/completion $fpath)
 autoload -U compinit
 compinit
 
+# load functions
+for function in ~/.zsh/functions/*; do
+  source $function
+done
+
 # automatically enter directories without cd
 setopt auto_cd
 
