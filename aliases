@@ -1,7 +1,4 @@
-# Todo
-alias todo='$EDITOR ~/.todo'
-
-# Unix
+#Unix
 alias tlf="tail -f"
 alias ln='ln -v'
 alias mkdir='mkdir -p'
@@ -13,6 +10,8 @@ alias -g G='| grep'
 alias -g M='| less'
 alias -g L='| wc -l'
 alias -g ONE="| awk '{ print \$1}'"
+alias e="$EDITOR"
+alias v="$VISUAL"
 
 # git
 alias g="git"
@@ -20,12 +19,9 @@ alias gci="git pull --rebase && rake && git push"
 
 # Bundler
 alias b="bundle"
-alias be="bundle exec"
-alias bake="bundle exec rake"
 
 # Tests and Specs
-# alias t="ruby -I test"
-alias s="bundle exec rspec"
+alias t="ruby -I test"
 alias cuc="bundle exec cucumber"
 
 # Rubygems
@@ -33,15 +29,11 @@ alias gi="gem install"
 alias giv="gem install -v"
 
 # Rails
-alias migrate="bundle exec rake db:migrate db:test:prepare"
-alias remigrate="bundle exec rake db:migrate db:migrate:redo db:schema:dump db:test:prepare"
-alias remongrate="bundle exec rake mongoid:migrate mongoid:migrate:redo"
-
-# Compass
-alias compass-init="compass create . --sass-dir \"scss\" --css-dir \"css\" --javascripts-dir \"js\""
-
-# Postgres
-alias pstart="postgres -D /usr/local/pgsql/data"
+alias migrate="rake db:migrate && rake db:rollback && rake db:migrate && rake db:test:prepare"
+alias m="migrate"
+alias rk="rake"
+alias s="rspec"
+alias z="zeus"
 
 # Heroku staging
 alias staging='heroku run console --remote staging'
@@ -65,6 +57,3 @@ alias db-backup-production='heroku pgbackups:capture --remote production'
 
 # Network
 alias whats-my-ip="curl -s checkip.dyndns.org | grep -Eo '[0-9\.]+'"
-
-# Shortcuts
-alias nerva="ssh sao@nerva.ax.lt -p 999"

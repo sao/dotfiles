@@ -1,14 +1,15 @@
+let mapleader = " "
+
 set history=50
-set incsearch     " do incremental searching
-set laststatus=2  " Always display the status line
+set incsearch           " do incremental searching
+set laststatus=2        " Always display the status line
 set nobackup
-set nocompatible  " Use Vim settings, rather then Vi settings
+set nocompatible        " Use Vim settings, rather then Vi settings
 set noswapfile
 set nowritebackup
-set ruler         " show the cursor position all the time
-set showcmd       " display incomplete commands
-set nowrap        " no wrap
-set clipboard=unnamed  " pasting
+set ruler               " show the cursor position all the time
+set showcmd             " display incomplete commands
+set clipboard+=unnamed  " pasting
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -16,18 +17,9 @@ if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
   syntax on
 endif
 
-" Cursor
-if exists('$TMUX')
-  let &t_SI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=1\x7\<Esc>\\"
-  let &t_EI = "\<Esc>Ptmux;\<Esc>\<Esc>]50;CursorShape=0\x7\<Esc>\\"
-else
-  let &t_SI = "\<Esc>]50;CursorShape=1\x7"
-  let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+if filereadable(expand("~/.vimrc.bundles"))
+  source ~/.vimrc.bundles
 endif
-
-" pathogen setup
-call pathogen#helptags()
-call pathogen#runtime_append_all_bundles()
 
 filetype plugin indent on
 
@@ -54,21 +46,17 @@ set expandtab
 " Display extra whitespace
 set list listchars=tab:»·,trail:·
 
-" Local config
-if filereadable("~/.vimrc.local")
-  source ~/.vimrc.local
-endif
-
 " Use Ack instead of Grep when available
-if executable("ack")
-  set grepprg=ack\ -H\ --nogroup\ --nocolor
+if executable("ag")
+  set grepprg=ag\ --nogroup\ --nocolor
 endif
 
 " Color scheme
 colorscheme twilight
 highlight NonText guibg=#060606
 highlight Folded  guibg=#0A0A0A guifg=#9090D0
-highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE gui=NONE guifg=DarkGrey guibg=NONE 
+highlight LineNr  term=bold ctermfg=DarkGrey guifg=DarkGrey
+" Numbers
 set number
 set numberwidth=5
 
@@ -77,9 +65,6 @@ nnoremap <leader>b :buffers<cr>:buffer<space>
 
 " File Operations
 noremap <leader>s :update<cr>
-
-" NERDTree
-map <F2> :NERDTreeToggle<cr>
 
 " Snippets are activated by Shift+Tab
 let g:snippetsEmu_key = "<S-Tab>"
@@ -106,9 +91,6 @@ let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
 " Cucumber navigation commands
 autocmd User Rails Rnavcommand step features/step_definitions -glob=**/* -suffix=_steps.rb
 autocmd User Rails Rnavcommand config config -glob=**/* -suffix=.rb -default=routes
-" :Cuc my text (no quotes) -> runs cucumber scenarios containing "my text"
-command! -nargs=+ Cuc :!ack --no-heading --no-break <q-args> | cut -d':' -f1,2 | xargs bundle exec cucumber --no-color
-
 
 " Get off my lawn
 nnoremap <Left> :echoe "Use h"<CR>
@@ -116,13 +98,34 @@ nnoremap <Right> :echoe "Use l"<CR>
 nnoremap <Up> :echoe "Use k"<CR>
 nnoremap <Down> :echoe "Use j"<CR>
 
+" vim-rspec mappings
+nnoremap <Leader>t :call RunCurrentSpecFile()<CR>
+nnoremap <Leader>s :call RunNearestSpec()<CR>
+nnoremap <Leader>l :call RunLastSpec()<CR>
+
 " Treat <li> and <p> tags like the block tags they are
 let g:html_indent_tags = 'li\|p'
 
 " Improve syntax highlighting
 au BufRead,BufNewFile Gemfile set filetype=ruby
 au BufRead,BufNewFile *.md set filetype=markdown
+au BufRead,BufNewFile *.md setlocal spell
+au BufRead,BufNewFile *.md setlocal textwidth=80
 
-" Highlight status bar in red while in insert mode
-au InsertEnter * hi StatusLine gui=italic,underline guibg=Red
-au InsertLeave * hi StatusLine gui=italic,underline guibg=#303030
+" Open new split panes to right and bottom
+set splitbelow
+set splitright
+
+" Quicker window movement
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-h> <C-w>h
+nnoremap <C-l> <C-w>l
+
+" configure syntastic syntax checking to check on open and save
+let g:syntastic_check_on_open=1
+
+" Local config
+if filereadable("~/.vimrc.local")
+  source ~/.vimrc.local
+endif
