@@ -7,7 +7,6 @@ fpath=(~/.zsh/completion $fpath)
 autoload -U compinit
 compinit
 
-# load functions
 for function in ~/.zsh/functions/*; do
   source $function
 done
@@ -16,7 +15,8 @@ done
 setopt auto_cd
 
 # use vim as an editor
-export EDITOR=vim
+export VISUAL=vim
+export EDITOR=$VISUAL
 
 # aliases
 if [ -e "$HOME/.aliases" ]; then
@@ -43,6 +43,10 @@ bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 
 # expand functions in the prompt
 setopt prompt_subst
+
+# disable flow control commands
+stty start undef
+stty stop undef
 
 # prompt
 export PS1='[${SSH_CONNECTION+"%n@%m:"}%~] '

@@ -1,4 +1,4 @@
-let mapleader = " "
+let mapleader = ","
 
 set history=50
 set incsearch           " do incremental searching
@@ -7,9 +7,26 @@ set nobackup
 set nocompatible        " Use Vim settings, rather then Vi settings
 set noswapfile
 set nowritebackup
+set nowrap
 set ruler               " show the cursor position all the time
 set showcmd             " display incomplete commands
 set clipboard+=unnamed  " pasting
+
+set statusline=\ "
+set statusline+=%1*%-25.80f%*\ " file name minimum 25, maxiumum 80 (right justified)
+set statusline+=%2*
+set statusline+=%h "help file flag
+set statusline+=%r "read only flag
+set statusline+=%m "modified flag
+set statusline+=%w "preview flag
+set statusline+=%*\ "
+set statusline+=%3*[
+set statusline+=%{strlen(&ft)?&ft:'none'} " filetype
+set statusline+=]%*\ "
+set statusline+=%4*%{fugitive#statusline()}%*\ " Fugitive
+set statusline+=%6*%{SyntasticStatuslineFlag()}%* " Syntastic Syntax Checking
+set statusline+=%= " right align
+set statusline+=\ %-14.(%l,%c%V%)\ %<%P%*\  " offset
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -53,18 +70,39 @@ endif
 
 " Color scheme
 colorscheme twilight
-highlight NonText guibg=#060606
-highlight Folded  guibg=#0A0A0A guifg=#9090D0
-highlight LineNr  term=bold ctermfg=DarkGrey guifg=DarkGrey
+hi NonText guibg=#060606
+hi Folded  guibg=#0A0A0A guifg=#9090D0
+hi LineNr  term=bold ctermfg=DarkGrey guifg=DarkGrey
+hi User1 gui=NONE ctermfg=White        ctermbg=DarkGray  guifg=#a7dfff guibg=#333333 " File name
+hi User2 gui=NONE ctermfg=LightRed     ctermbg=DarkGray  guifg=#ff9999 guibg=#333333 " File Flag
+hi User3 gui=NONE ctermfg=White        ctermbg=DarkGray  guifg=#ffffff guibg=#333333 " File type
+hi User4 gui=NONE ctermfg=Green        ctermbg=DarkGray  guifg=#90ff90 guibg=#333333 " Fugitive
+hi User6 gui=NONE ctermfg=White        ctermbg=DarkRed   guifg=#ffffff guibg=#af0000 " Syntax Errors
+hi User7 gui=NONE ctermfg=White        ctermbg=Yellow    guifg=#ffff00 guibg=#333333
+hi User8 gui=NONE ctermfg=Red          ctermbg=DarkGray  guifg=#d08356 guibg=#333333 " Position
 " Numbers
 set number
 set numberwidth=5
 
 " Buffers
-nnoremap <leader>b :buffers<cr>:buffer<space>
+map <Leader>b :buffers<CR>:buffer<space>
+map <Leader>gs :Gstatus<CR>
+map <Leader>gac :Gcommit -m -a ""<LEFT>
+map <Leader>gc :Gcommit -m ""<LEFT>
+map <Leader>m :Rmodel
+map <Leader>sm :RSmodel
+map <Leader>su :RSunittest
+map <Leader>sv :RSview
+map <Leader>vc :RVcontroller<cr>
+map <Leader>vf :RVfunctional<cr>
+map <Leader>vi :tabe ~/.vimrc<CR>
+map <Leader>vm :RVmodel<cr>
+map <Leader>vu :RVunittest<CR>
+map <Leader>vv :RVview<cr>
 
 " File Operations
-noremap <leader>s :update<cr>
+map <C-s> <esc>:w<CR>
+imap <C-s> <esc>:w<CR>
 
 " Snippets are activated by Shift+Tab
 let g:snippetsEmu_key = "<S-Tab>"
@@ -79,14 +117,17 @@ function! InsertTabWrapper()
     if !col || getline('.')[col - 1] !~ '\k'
         return "\<tab>"
     else
-        return "\<c-p>"
+        return "\<C-p>"
     endif
 endfunction
-inoremap <tab> <c-r>=InsertTabWrapper()<cr>
-inoremap <s-tab> <c-n>
+inoremap <tab> <C-r>=InsertTabWrapper()<CR>
+inoremap <s-tab> <C-n>
 
 " Tags
 let g:Tlist_Ctags_Cmd="ctags --exclude='*.js'"
+
+" Remove trailing whitespace
+autocmd BufWritePre * :%s/\s\+$//e
 
 " Cucumber navigation commands
 autocmd User Rails Rnavcommand step features/step_definitions -glob=**/* -suffix=_steps.rb
@@ -124,6 +165,11 @@ nnoremap <C-l> <C-w>l
 
 " configure syntastic syntax checking to check on open and save
 let g:syntastic_check_on_open=1
+let g:syntastic_ruby_exec='ruby-1.9.3-p194'
+
+" configure ctrlp
+let g:ctrlp_show_hidden = 1
+set wildignore+=*/tmp/*,*/log/*,.DS_Store
 
 " Local config
 if filereadable("~/.vimrc.local")
