@@ -1,7 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =5
-let g:netrw_dirhist_1='/Users/Silas/Dropbox/Development/Rails/soundcloud-app/soundcloud-app'
-let g:netrw_dirhist_2='/Users/Silas/Dropbox/Development/rails-base-box'
-let g:netrw_dirhist_3='/Users/Silas/Dropbox/Development/Rails/soundcloud-app/soundcloud-app'
-let g:netrw_dirhist_4='/Users/Silas/Dropbox/Development/rails-base-box'
-let g:netrw_dirhist_5='/Users/Silas/Dropbox/Development/AIS/ais-data'
