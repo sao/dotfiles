@@ -79,3 +79,6 @@ PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
 
 # RVM
 [[ -s '/Users/Silas/.rvm/scripts/rvm' ]] && source '/Users/Silas/.rvm/scripts/rvm'
+
+# tmuxinator
+[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
