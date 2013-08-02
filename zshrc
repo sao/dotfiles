@@ -1,3 +1,6 @@
+# load base16
+source "$HOME/.zsh/base16-default.sh"
+
 export PATH='/usr/local/bin:/usr/bin:/Users/Silas/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/Applications/Postgres.app/Contents/MacOS/bin'
 
 # load our own completion functions

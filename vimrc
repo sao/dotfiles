@@ -11,22 +11,7 @@ set nowrap
 set ruler               " show the cursor position all the time
 set showcmd             " display incomplete commands
 set clipboard+=unnamed  " pasting
-
-set statusline=\ "
-set statusline+=%1*%-25.80f%*\ " file name minimum 25, maxiumum 80 (right justified)
-set statusline+=%2*
-set statusline+=%h "help file flag
-set statusline+=%r "read only flag
-set statusline+=%m "modified flag
-set statusline+=%w "preview flag
-set statusline+=%*\ "
-set statusline+=%3*[
-set statusline+=%{strlen(&ft)?&ft:'none'} " filetype
-set statusline+=]%*\ "
-set statusline+=%4*%{fugitive#statusline()}%*\ " Fugitive
-set statusline+=%6*%{SyntasticStatuslineFlag()}%* " Syntastic Syntax Checking
-set statusline+=%= " right align
-set statusline+=\ %-14.(%l,%c%V%)\ %<%P%*\  " offset
+set ttimeoutlen=25
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
@@ -68,18 +53,17 @@ if executable("ag")
   set grepprg=ag\ --nogroup\ --nocolor
 endif
 
+" Open all grep commands into quicklist
+autocmd QuickFixCmdPost *grep* cwindow
+
 " Color scheme
-colorscheme twilight
+set background=dark
+let base16colorspace=256
+colorscheme base16-default
 hi NonText guibg=#060606
 hi Folded  guibg=#0A0A0A guifg=#9090D0
 hi LineNr  term=bold ctermfg=DarkGrey guifg=DarkGrey
-hi User1 gui=NONE ctermfg=White        ctermbg=DarkGray  guifg=#a7dfff guibg=#333333 " File name
-hi User2 gui=NONE ctermfg=LightRed     ctermbg=DarkGray  guifg=#ff9999 guibg=#333333 " File Flag
-hi User3 gui=NONE ctermfg=White        ctermbg=DarkGray  guifg=#ffffff guibg=#333333 " File type
-hi User4 gui=NONE ctermfg=Green        ctermbg=DarkGray  guifg=#90ff90 guibg=#333333 " Fugitive
-hi User6 gui=NONE ctermfg=White        ctermbg=DarkRed   guifg=#ffffff guibg=#af0000 " Syntax Errors
-hi User7 gui=NONE ctermfg=White        ctermbg=Yellow    guifg=#ffff00 guibg=#333333
-hi User8 gui=NONE ctermfg=Red          ctermbg=DarkGray  guifg=#d08356 guibg=#333333 " Position
+
 " Numbers
 set number
 set numberwidth=5
@@ -166,6 +150,9 @@ nnoremap <C-l> <C-w>l
 " configure syntastic syntax checking to check on open and save
 let g:syntastic_check_on_open=1
 let g:syntastic_ruby_exec='ruby-1.9.3-p194'
+
+" configure nerdtree
+map <F2> :NERDTreeToggle<CR>
 
 " configure ctrlp
 let g:ctrlp_show_hidden = 1

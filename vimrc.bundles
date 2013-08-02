@@ -8,6 +8,9 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 " Define bundles via Github repos
+Bundle 'chriskempson/base16-vim'
+Bundle 'bling/vim-airline'
+Bundle 'scrooloose/nerdtree'
 Bundle 'vim-ruby/vim-ruby'
 Bundle 'danro/rename.vim'
 Bundle 'kchmck/vim-coffee-script'
