@@ -4,7 +4,6 @@ servers = (
     chatnet = "freenode";
     port = "6667";
     autoconnect = "yes";
-    password = "Absolute1965irc";
   }
 );
 
