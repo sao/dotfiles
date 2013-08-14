@@ -12,6 +12,10 @@ set ruler               " show the cursor position all the time
 set showcmd             " display incomplete commands
 set clipboard+=unnamed  " pasting
 set ttimeoutlen=25
+set undodir=$HOME/.vim/undo
+set undolevels=1000
+set undoreload=10000
+set winwidth=80
 
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.

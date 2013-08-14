@@ -182,7 +182,7 @@ abstracts = {
 
   # default background for all statusbars. You can also give
   # the default foreground color for statusbar items.
-  sb_background = "%K%w";
+  sb_background = "%0%w";
 
   # background for prompt / input line
   sb_prompt_bg = "%n";
