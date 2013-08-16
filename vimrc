@@ -17,6 +17,14 @@ set undolevels=1000
 set undoreload=10000
 set winwidth=80
 
+if &term =~ '^screen'
+  " tmux will send xterm-style keys when its xterm-keys option is on
+  execute "set <xUp>=\e[1;*A"
+  execute "set <xDown>=\e[1;*B"
+  execute "set <xRight>=\e[1;*C"
+  execute "set <xLeft>=\e[1;*D"
+endif
+
 " Switch syntax highlighting on, when the terminal has colors
 " Also switch on highlighting the last used search pattern.
 if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
@@ -69,8 +77,16 @@ hi Folded  guibg=#0A0A0A guifg=#9090D0
 hi LineNr  term=bold ctermfg=DarkGrey guifg=DarkGrey
 
 " Numbers
-set number
+set relativenumber
 set numberwidth=5
+
+" Bubble single lines
+nmap <C-Up> [e
+nmap <C-Down> ]e
+
+" Bubble multiple lines
+vmap <C-Up> [egv
+vmap <C-Down> ]egv
 
 " Buffers
 map <Leader>b :buffers<CR>:buffer<space>
