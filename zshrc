@@ -1,7 +1,11 @@
+export PATH="/usr/local/bin:/usr/bin:$HOME/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
+
 # load base16
 source "$HOME/.zsh/base16-default.sh"
 
-export PATH='/usr/local/bin:/usr/bin:/Users/Silas/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin:/Applications/Postgres.app/Contents/MacOS/bin'
+# load chruby
+source "/usr/local/opt/chruby/share/chruby/chruby.sh"
+chruby ruby-1.9
 
 # hub ailas
 eval "$(hub alias -s)"
@@ -50,12 +54,25 @@ bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 # expand functions in the prompt
 setopt prompt_subst
 
+# adds the current branch name in green
+git_prompt_info() {
+  ref=$(git symbolic-ref HEAD 2> /dev/null)
+  if [[ -n $ref ]]; then
+    echo "[%{$fg_bold[green]%}${ref#refs/heads/}%{$reset_color%}]"
+  fi
+}
+export PS1='$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
+
+# makes color constants available
+autoload -U colors
+colors
+
+# enable colored output from ls, etc
+export CLICOLOR=1
+
 # disable flow control commands
 stty start undef
 stty stop undef
-
-# prompt
-export PS1='[${SSH_CONNECTION+"%n@%m:"}%~] '
 
 # ignore duplicate history entries
 setopt histignoredups
@@ -75,16 +92,8 @@ setopt AUTOCD
 setopt AUTOPUSHD PUSHDMINUS PUSHDSILENT PUSHDTOHOME
 setopt cdablevars
 
-# Try to correct command line spelling
-setopt CORRECT CORRECT_ALL
-
 # Enable extended globbing
 setopt EXTENDED_GLOB
 
-PATH=$PATH:$HOME/.rvm/bin # Add RVM to PATH for scripting
-
-# RVM
-[[ -s '/Users/Silas/.rvm/scripts/rvm' ]] && source '/Users/Silas/.rvm/scripts/rvm'
-
 # tmuxinator
-[[ -s $HOME/.tmuxinator/scripts/tmuxinator ]] && source $HOME/.tmuxinator/scripts/tmuxinator
+source $HOME/.tmuxinator/completion.zsh

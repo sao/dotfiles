@@ -1,6 +1,8 @@
 let mapleader = ","
 
+set backspace=2
 set history=50
+set lazyredraw
 set incsearch           " do incremental searching
 set laststatus=2        " Always display the status line
 set nobackup
@@ -16,6 +18,9 @@ set undodir=$HOME/.vim/undo
 set undolevels=1000
 set undoreload=10000
 set winwidth=80
+set tabstop=2
+set shiftwidth=2
+set expandtab
 
 if &term =~ '^screen'
   " tmux will send xterm-style keys when its xterm-keys option is on
@@ -52,11 +57,6 @@ augroup vimrcEx
     \ endif
 augroup END
 
-" Softtabs, 2 spaces
-set tabstop=2
-set shiftwidth=2
-set expandtab
-
 " Display extra whitespace
 set list listchars=tab:»·,trail:·
 
@@ -76,13 +76,13 @@ hi NonText guibg=#060606
 hi Folded  guibg=#0A0A0A guifg=#9090D0
 hi LineNr  term=bold ctermfg=DarkGrey guifg=DarkGrey
 
-" Numbers
+" " Numbers
 set relativenumber
 set numberwidth=5
 
 " Bubble single lines
-nmap <C-Up> [e
 nmap <C-Down> ]e
+nmap <C-Up> [e
 
 " Bubble multiple lines
 vmap <C-Up> [egv

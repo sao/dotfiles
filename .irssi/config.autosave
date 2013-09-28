@@ -11,7 +11,8 @@ chatnets = { freenode = { type = "IRC"; }; };
 
 channels = (
   { name = "#ruby"; chatnet = "freenode"; autojoin = "yes"; },
-  { name = "#rubyonrails"; chatnet = "freenode"; autojoin = "yes"; }
+  { name = "#rubyonrails"; chatnet = "freenode"; autojoin = "yes"; },
+  { name = "#python"; chatnet = "freenode"; autojoin = "yes"; }
 );
 
 aliases = {
@@ -209,6 +210,16 @@ windows = {
     );
   };
   3 = {
+    items = (
+      {
+        type = "CHANNEL";
+        chat_type = "IRC";
+        name = "#python";
+        tag = "freenode";
+      }
+    );
+  };
+  4 = {
     items = (
       {
         type = "CHANNEL";
