@@ -5,7 +5,9 @@ source "$HOME/.zsh/base16-default.sh"
 
 # load chruby
 source "/usr/local/opt/chruby/share/chruby/chruby.sh"
-chruby ruby-1.9
+
+# load nodenv shims
+if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
 
 # hub ailas
 eval "$(hub alias -s)"
