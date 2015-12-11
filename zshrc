@@ -5,6 +5,7 @@ source "$HOME/.zsh/base16-default.sh"
 
 # load chruby
 source "/usr/local/opt/chruby/share/chruby/chruby.sh"
+chruby 2
 
 # load nodenv shims
 if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
