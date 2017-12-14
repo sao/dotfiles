@@ -1,4 +1,4 @@
-export PATH="/usr/local/bin:/usr/bin:$HOME/bin:/bin:/usr/sbin:/sbin:/usr/X11/bin"
+export PATH=/usr/local/bin:/usr/local/share/python:$PATH
 
 # load base16
 source "$HOME/.zsh/base16-default.sh"
@@ -98,5 +98,3 @@ setopt cdablevars
 # Enable extended globbing
 setopt EXTENDED_GLOB
 
-# tmuxinator
-source $HOME/.tmuxinator/completion.zsh

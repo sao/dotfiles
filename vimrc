@@ -71,7 +71,7 @@ autocmd QuickFixCmdPost *grep* cwindow
 " Color scheme
 set background=dark
 let base16colorspace=256
-colorscheme base16-default
+colorscheme base16-default-dark
 hi NonText guibg=#060606
 hi Folded  guibg=#0A0A0A guifg=#9090D0
 hi LineNr  term=bold ctermfg=DarkGrey guifg=DarkGrey
