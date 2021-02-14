@@ -1,14 +1,8 @@
 export PATH=/usr/local/bin:/usr/local/share/python:$PATH
+export ZSH="/Users/silassao/.oh-my-zsh"
+ZSH_THEME="theunraveler"
 
-# load base16
-source "$HOME/.zsh/base16-default.sh"
-
-# load chruby
-source "/usr/local/opt/chruby/share/chruby/chruby.sh"
-chruby 2
-
-# load nodenv shims
-if which nodenv > /dev/null; then eval "$(nodenv init -)"; fi
+source $ZSH/oh-my-zsh.sh
 
 # hub ailas
 eval "$(hub alias -s)"
@@ -57,21 +51,9 @@ bindkey -s "^T" "^[Isudo ^[A" # "t" for "toughguy"
 # expand functions in the prompt
 setopt prompt_subst
 
-# adds the current branch name in green
-git_prompt_info() {
-  ref=$(git symbolic-ref HEAD 2> /dev/null)
-  if [[ -n $ref ]]; then
-    echo "[%{$fg_bold[green]%}${ref#refs/heads/}%{$reset_color%}]"
-  fi
-}
-export PS1='$(git_prompt_info)[${SSH_CONNECTION+"%{$fg_bold[green]%}%n@%m:"}%{$fg_bold[blue]%}%~%{$reset_color%}] '
-
 # makes color constants available
 autoload -U colors
 colors
-
-# enable colored output from ls, etc
-export CLICOLOR=1
 
 # disable flow control commands
 stty start undef

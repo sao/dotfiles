@@ -22,40 +22,9 @@ set tabstop=2
 set shiftwidth=2
 set expandtab
 
-if &term =~ '^screen'
-  " tmux will send xterm-style keys when its xterm-keys option is on
-  execute "set <xUp>=\e[1;*A"
-  execute "set <xDown>=\e[1;*B"
-  execute "set <xRight>=\e[1;*C"
-  execute "set <xLeft>=\e[1;*D"
-endif
-
-" Switch syntax highlighting on, when the terminal has colors
-" Also switch on highlighting the last used search pattern.
-if (&t_Co > 2 || has("gui_running")) && !exists("syntax_on")
-  syntax on
-endif
-
-if filereadable(expand("~/.vimrc.bundles"))
-  source ~/.vimrc.bundles
-endif
+syntax on
 
 filetype plugin indent on
-
-augroup vimrcEx
-  au!
-
-  " For all text files set 'textwidth' to 78 characters.
-  autocmd FileType text setlocal textwidth=78
-
-  " When editing a file, always jump to the last known cursor position.
-  " Don't do it when the position is invalid or when inside an event handler
-  " (happens when dropping a file on gvim).
-  autocmd BufReadPost *
-    \ if line("'\"") > 0 && line("'\"") <= line("$") |
-    \   exe "normal g`\"" |
-    \ endif
-augroup END
 
 " Display extra whitespace
 set list listchars=tab:»·,trail:·
@@ -70,8 +39,6 @@ autocmd QuickFixCmdPost *grep* cwindow
 
 " Color scheme
 set background=dark
-let base16colorspace=256
-colorscheme base16-default-dark
 hi NonText guibg=#060606
 hi Folded  guibg=#0A0A0A guifg=#9090D0
 hi LineNr  term=bold ctermfg=DarkGrey guifg=DarkGrey
