@@ -14,7 +14,7 @@ NVM_DIR="$HOME/.nvm"
 NODE_VERSION_FILE="$DOTFILES/agent/skills/node/.nvmrc"
 
 # Install nvm if not present
-if [[ ! -d "$NVM_DIR" ]]; then
+if [[ ! -s "$NVM_DIR/nvm.sh" ]]; then
   echo "  Installing nvm..."
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
 fi
