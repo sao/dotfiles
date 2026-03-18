@@ -1,0 +1,5 @@
+# Don't commit local overrides or generated files
+*.local
+agent/skills/python/.venv/
+agent/skills/node/node_modules/
+.DS_Store

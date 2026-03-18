@@ -1,0 +1,3 @@
+# ~/.zshenv.local
+# Machine-specific env vars. Sourced last by ~/.zshenv.
+# Avoid PATH changes here — use ~/.zshrc.local instead.

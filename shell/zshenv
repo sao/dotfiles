@@ -1,0 +1,15 @@
+# ~/.zshenv
+# Sourced for ALL zsh invocations (login, interactive, scripts).
+# Keep this minimal — no PATH changes, no interactive behavior.
+# Put PATH changes in ~/.zshrc or ~/.zshrc.local.
+
+export LANG="en_US.UTF-8"
+export LC_ALL="en_US.UTF-8"
+
+# XDG base dirs
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_DATA_HOME="$HOME/.local/share"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+# Local overrides
+[[ -f ~/.zshenv.local ]] && source ~/.zshenv.local

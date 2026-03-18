@@ -1,0 +1,35 @@
+# ~/.rgignore
+# Global ignore patterns for ripgrep (rg)
+
+# Dependencies
+node_modules/
+.venv/
+venv/
+__pycache__/
+*.pyc
+.uv/
+
+# Build output
+dist/
+build/
+out/
+.next/
+.nuxt/
+
+# macOS
+.DS_Store
+
+# Editors
+.vscode/
+.idea/
+*.swp
+
+# Version control
+.git/
+
+# Lockfiles (usually not useful to search)
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+uv.lock
+Cargo.lock

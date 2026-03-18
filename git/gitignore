@@ -1,0 +1,44 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+._*
+.Spotlight-V100
+.Trashes
+
+# Editors / IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.nvim/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+.env
+*.egg-info/
+dist/
+build/
+.uv/
+uv.lock        # uncomment to ignore globally; usually better to commit per-project
+
+# Node
+node_modules/
+npm-debug.log*
+.npm
+
+# Env files
+.env
+.env.local
+.env.*.local
+
+# direnv
+.envrc
+
+# Claude / Agent
+.claude/
