@@ -1,0 +1,7 @@
+# Global npm packages — installed by agent/envs/node.sh
+# One package per line. Comments and blank lines are ignored.
+
+typescript
+tsx
+@anthropic-ai/sdk
+@doist/todoist-cli

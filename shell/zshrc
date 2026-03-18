@@ -1,0 +1,83 @@
+# ~/.zshrc
+# Sourced for interactive shells.
+
+# ── zsh/configs directory loading ─────────────────────────────────────────────
+# Mirrors the thoughtbot pattern: pre/ → configs/ → post/
+_load_settings() {
+  local _dir="$1"
+  if [[ -d "$_dir" ]]; then
+    [[ -d "$_dir/pre" ]] && for f in "$_dir"/pre/**/*~*.zwc(N-.); do source "$f"; done
+    for f in "$_dir"/**/*(N-.); do
+      case "$f" in
+        "$_dir"/(pre|post)/*|*.zwc) ;;
+        *) source "$f" ;;
+      esac
+    done
+    [[ -d "$_dir/post" ]] && for f in "$_dir"/post/**/*~*.zwc(N-.); do source "$f"; done
+  fi
+}
+_load_settings "$HOME/.zsh/configs"
+
+# ── Homebrew ──────────────────────────────────────────────────────────────────
+if [[ -f /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
+# ── PATH ──────────────────────────────────────────────────────────────────────
+export PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+
+# ── Editor ────────────────────────────────────────────────────────────────────
+export EDITOR="nvim"
+export VISUAL="nvim"
+
+# ── History ───────────────────────────────────────────────────────────────────
+HISTFILE="$HOME/.zsh_history"
+HISTSIZE=100000
+SAVEHIST=100000
+setopt SHARE_HISTORY
+setopt HIST_IGNORE_DUPS
+setopt HIST_IGNORE_SPACE
+setopt EXTENDED_HISTORY
+
+# ── Completion ────────────────────────────────────────────────────────────────
+autoload -Uz compinit && compinit
+zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
+
+# ── zsh plugins (via brew) ────────────────────────────────────────────────────
+BREW_PREFIX="$(brew --prefix 2>/dev/null || echo /opt/homebrew)"
+[[ -f "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh" ]] && \
+  source "$BREW_PREFIX/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
+[[ -f "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh" ]] && \
+  source "$BREW_PREFIX/share/zsh-autosuggestions/zsh-autosuggestions.zsh"
+
+# ── fzf ───────────────────────────────────────────────────────────────────────
+[[ -f "$BREW_PREFIX/opt/fzf/shell/completion.zsh" ]]   && source "$BREW_PREFIX/opt/fzf/shell/completion.zsh"
+[[ -f "$BREW_PREFIX/opt/fzf/shell/key-bindings.zsh" ]] && source "$BREW_PREFIX/opt/fzf/shell/key-bindings.zsh"
+export FZF_DEFAULT_COMMAND='rg --files --hidden --follow --glob "!.git"'
+export FZF_DEFAULT_OPTS="--height 40% --layout=reverse --border"
+
+# ── zoxide (smarter cd) ───────────────────────────────────────────────────────
+command -v zoxide &>/dev/null && eval "$(zoxide init zsh)"
+
+# ── direnv ────────────────────────────────────────────────────────────────────
+command -v direnv &>/dev/null && eval "$(direnv hook zsh)"
+
+# ── nvm ───────────────────────────────────────────────────────────────────────
+export NVM_DIR="$HOME/.nvm"
+[[ -d "$NVM_DIR" ]] || mkdir -p "$NVM_DIR"
+[[ -s "$NVM_DIR/nvm.sh" ]] && source "$NVM_DIR/nvm.sh"
+[[ -s "$NVM_DIR/bash_completion" ]] && source "$NVM_DIR/bash_completion"
+
+# ── uv ────────────────────────────────────────────────────────────────────────
+export UV_LINK_MODE=copy
+[[ -f "$HOME/.local/bin/uv" ]] && export PATH="$HOME/.local/bin:$PATH"
+
+# ── Starship prompt ───────────────────────────────────────────────────────────
+command -v starship &>/dev/null && eval "$(starship init zsh)"
+
+# ── Aliases ───────────────────────────────────────────────────────────────────
+[[ -f ~/.aliases ]] && source ~/.aliases
+
+# ── Local overrides ───────────────────────────────────────────────────────────
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
