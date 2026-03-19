@@ -5,7 +5,7 @@ Personal dotfiles for macOS. Manages shell config, git, editor, agent tooling, a
 ## Install
 
 ```zsh
-git clone https://github.com/scylas/dotfiles.git ~/.dotfiles
+git clone https://github.com/sao/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
 chmod +x install.sh symlinks.sh agent/mcp/install.sh agent/envs/python.sh agent/envs/node.sh macos/defaults.sh
 ./install.sh
@@ -71,7 +71,7 @@ Edit `agent/mcp/manifest.json` and add an entry. Three supported types:
   "name": "filesystem",
   "type": "npx",
   "package": "@modelcontextprotocol/server-filesystem",
-  "args": ["/Users/silas"]
+  "args": ["/Users/account"]
 }
 ```
 
@@ -113,7 +113,7 @@ These files are **copied from templates on first install** and never overwritten
 After install, edit `~/.gitconfig.local` to set your identity:
 ```ini
 [user]
-  name  = Silas
+  name  = Your Name
   email = you@example.com
 ```
 
