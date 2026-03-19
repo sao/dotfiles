@@ -44,6 +44,11 @@ else
   success "Installed"
 fi
 
+# Ensure Homebrew is on PATH for the rest of this script
+if [[ -f /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 info "Running brew bundle..."
 brew bundle --file="$DOTFILES/Brewfile"
 success "Brewfile applied"
