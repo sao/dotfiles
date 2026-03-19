@@ -42,8 +42,6 @@ brew "node"              # baseline node for npx/uvx MCP servers
 
 # ── Productivity ──────────────────────────────────────────────────────────────
 brew "direnv"            # per-directory env vars
-brew "tldr"              # simplified man pages
-brew "watch"
 
 # ── macOS GUI apps ────────────────────────────────────────────────────────────
 cask "ghostty"           # terminal emulator
