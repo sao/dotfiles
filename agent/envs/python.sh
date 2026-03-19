@@ -10,6 +10,12 @@ GREEN='\033[0;32m'
 RESET='\033[0m'
 
 DOTFILES="$(cd "$(dirname "$0")/../.." && pwd)"
+
+# Ensure Homebrew is on PATH (needed on fresh installs before shell restart)
+if [[ -f /opt/homebrew/bin/brew ]]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+fi
+
 SKILLS_VENV="$DOTFILES/agent/skills/python/.venv"
 REQUIREMENTS="$DOTFILES/agent/skills/python/requirements.txt"
 
