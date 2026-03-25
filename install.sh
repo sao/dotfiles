@@ -76,11 +76,11 @@ copy_template "$DOTFILES/templates/zshenv.template"     "$HOME/.zshenv.local"
 
 # ── Python environment (uv) ───────────────────────────────────────────────────
 header "Python (uv)"
-"$DOTFILES/agent/envs/python.sh"
+"$DOTFILES/python/install.sh"
 
 # ── Node environment (nvm) ────────────────────────────────────────────────────
 header "Node (nvm)"
-"$DOTFILES/agent/envs/node.sh"
+"$DOTFILES/node/install.sh"
 
 # ── MCP servers ───────────────────────────────────────────────────────────────
 header "MCP Servers"

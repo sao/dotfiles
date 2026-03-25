@@ -1,7 +1,0 @@
-# agent/skills/python/requirements.txt
-# Add Python packages needed for agent skills here.
-# Installed into the agent venv at agent/skills/python/.venv
-
-# anthropic
-# httpx
-# pydantic

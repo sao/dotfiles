@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What This Is
 
-Personal macOS dotfiles repo. Manages shell (zsh), git, editor (neovim), Homebrew packages, macOS defaults, and AI agent tooling (MCP servers, Claude settings, skill environments).
+Personal macOS dotfiles repo. Manages shell (zsh), git, editor (neovim), Homebrew packages, macOS defaults, language toolchains (Node, Python), and AI agent tooling (MCP servers, Claude settings).
 
 ## Key Commands
 
@@ -25,7 +25,9 @@ brew bundle --file=Brewfile  # Install/update Homebrew packages only
 
 **MCP server management:** `agent/mcp/manifest.json` is the source of truth for MCP servers. The `agent/mcp/install.sh` script reads it with `jq` and writes `~/.claude/claude_desktop_config.json`. Three server types: `npx`, `uvx`, `local`.
 
-**Agent skill environments:** `agent/envs/python.sh` creates a venv at `agent/skills/python/.venv/` with packages from `agent/skills/python/requirements.txt`. `agent/envs/node.sh` installs nvm, pins Node version from `agent/skills/node/.nvmrc`, and installs global packages (typescript, tsx, @anthropic-ai/sdk).
+**Node environment:** `node/install.sh` installs nvm, pins the Node version from `node/.nvmrc`, and installs global npm packages listed in `node/global-packages.txt`.
+
+**Python environment:** `python/install.sh` installs uv (Python package manager).
 
 **Shell loading order:** `zshenv` (all shells, minimal) → `zshrc` (interactive: Homebrew, PATH, plugins, fzf, zoxide, direnv, nvm, uv, starship, aliases) → `*.local` overrides.
 

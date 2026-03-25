@@ -1,6 +1,6 @@
 #!/usr/bin/env zsh
 #
-# agent/envs/node.sh
+# node/install.sh
 # Installs nvm and pins the Node version from .nvmrc
 #
 
@@ -9,15 +9,9 @@ set -e
 GREEN='\033[0;32m'
 RESET='\033[0m'
 
-DOTFILES="$(cd "$(dirname "$0")/../.." && pwd)"
-
-# Ensure Homebrew is on PATH (needed on fresh installs before shell restart)
-if [[ -f /opt/homebrew/bin/brew ]]; then
-  eval "$(/opt/homebrew/bin/brew shellenv)"
-fi
-
+DOTFILES="$(cd "$(dirname "$0")/.." && pwd)"
 NVM_DIR="$HOME/.nvm"
-NODE_VERSION_FILE="$DOTFILES/agent/skills/node/.nvmrc"
+NODE_VERSION_FILE="$DOTFILES/node/.nvmrc"
 
 # Install nvm if not present
 if [[ ! -s "$NVM_DIR/nvm.sh" ]]; then
@@ -48,7 +42,7 @@ fi
 echo "  ${GREEN}✓${RESET} Node $(node --version)"
 
 # Global packages from global-packages.txt
-GLOBAL_PACKAGES_FILE="$DOTFILES/agent/skills/node/global-packages.txt"
+GLOBAL_PACKAGES_FILE="$DOTFILES/node/global-packages.txt"
 if [[ -f "$GLOBAL_PACKAGES_FILE" ]]; then
   echo "  Installing global Node packages..."
   grep -v '^\s*#' "$GLOBAL_PACKAGES_FILE" | grep -v '^\s*$' | xargs npm install -g 2>/dev/null
