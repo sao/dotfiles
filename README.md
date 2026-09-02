@@ -25,7 +25,8 @@ Open a new shell when done.
 │   ├── zshrc               # → ~/.zshrc
 │   ├── zshenv              # → ~/.zshenv
 │   ├── aliases.sh          # → ~/.aliases
-│   └── starship.toml       # → ~/.config/starship.toml
+│   ├── starship.toml       # → ~/.config/starship.toml
+│   └── wezterm.lua         # → ~/.wezterm.lua
 │
 ├── git/
 │   ├── gitconfig           # → ~/.gitconfig

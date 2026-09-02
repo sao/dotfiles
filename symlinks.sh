@@ -43,3 +43,6 @@ link "$DOTFILES/shell/starship.toml" "$HOME/.config/starship.toml"
 echo "Linking ghostty config..."
 mkdir -p "$HOME/.config/ghostty"
 link "$DOTFILES/shell/ghostty.config" "$HOME/.config/ghostty/config"
+
+echo "Linking wezterm config..."
+link "$DOTFILES/shell/wezterm.lua" "$HOME/.wezterm.lua"
