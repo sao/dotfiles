@@ -1,17 +1,17 @@
 # dotfiles
 
-Personal dotfiles for macOS. Manages shell config, git, editor, agent tooling, and MCP servers.
+Personal dotfiles for macOS. Manages shell config, git, editor, Homebrew packages, and Node/Python toolchains.
 
 ## Install
 
 ```zsh
 git clone https://github.com/sao/dotfiles.git ~/.dotfiles
 cd ~/.dotfiles
-chmod +x install.sh symlinks.sh agent/mcp/install.sh agent/envs/python.sh agent/envs/node.sh macos/defaults.sh
+chmod +x install.sh symlinks.sh node/install.sh python/install.sh macos/defaults.sh
 ./install.sh
 ```
 
-Open a new shell when done.
+When it finishes, it drops you into a fresh shell with everything loaded.
 
 ## Structure
 
@@ -33,20 +33,12 @@ Open a new shell when done.
 │   ├── gitignore           # → ~/.gitignore
 │   └── gitmessage          # → ~/.gitmessage
 │
-├── agent/
-│   ├── claude/
-│   │   └── settings.json   # → ~/.claude/settings.json
-│   ├── mcp/
-│   │   ├── manifest.json   # MCP server registry — edit this to add servers
-│   │   └── install.sh      # Reads manifest → writes ~/.claude/claude_desktop_config.json
-│   ├── envs/
-│   │   ├── python.sh       # uv + agent skill venv
-│   │   └── node.sh         # nvm + global packages
-│   └── skills/
-│       ├── python/
-│       │   └── requirements.txt   # Python packages for agent skills
-│       └── node/
-│           └── .nvmrc             # Pinned Node version
+├── node/
+│   ├── .nvmrc              # Pinned Node version (nvm)
+│   └── install.sh          # Installs nvm + Node
+│
+├── python/
+│   └── install.sh          # Installs uv
 │
 ├── templates/
 │   ├── gitconfig.template   # → ~/.gitconfig.local (copied on first install)
@@ -60,44 +52,6 @@ Open a new shell when done.
 └── misc/
     ├── hushlogin           # → ~/.hushlogin (silences login banner)
     └── rgignore            # → ~/.rgignore (global ripgrep ignores)
-```
-
-## Adding MCP Servers
-
-Edit `agent/mcp/manifest.json` and add an entry. Three supported types:
-
-**npx** — remote Node package:
-```json
-{
-  "name": "filesystem",
-  "type": "npx",
-  "package": "@modelcontextprotocol/server-filesystem",
-  "args": ["/Users/account"]
-}
-```
-
-**uvx** — remote Python package:
-```json
-{
-  "name": "fetch",
-  "type": "uvx",
-  "package": "mcp-server-fetch"
-}
-```
-
-**local** — server living in this repo:
-```json
-{
-  "name": "my-tool",
-  "type": "local",
-  "path": "./servers/my-tool/index.js",
-  "runtime": "node"
-}
-```
-
-Then re-run:
-```zsh
-./agent/mcp/install.sh
 ```
 
 ## Local Overrides

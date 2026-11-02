@@ -29,9 +29,6 @@ link "$DOTFILES/git/gitconfig"   "$HOME/.gitconfig"
 link "$DOTFILES/git/gitignore"   "$HOME/.gitignore"
 link "$DOTFILES/git/gitmessage"  "$HOME/.gitmessage"
 
-echo "Linking agent configs..."
-link "$DOTFILES/agent/claude/settings.json" "$HOME/.claude/settings.json"
-
 echo "Linking misc..."
 link "$DOTFILES/misc/hushlogin"  "$HOME/.hushlogin"
 link "$DOTFILES/misc/rgignore"   "$HOME/.rgignore"

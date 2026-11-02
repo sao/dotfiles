@@ -22,6 +22,16 @@ warn()    { echo "${YELLOW}⚠${RESET} $*"; }
 error()   { echo "${RED}✗${RESET} $*" >&2; }
 header()  { echo "\n${BOLD}$*${RESET}"; }
 
+# ── sudo (ask once) ───────────────────────────────────────────────────────────
+# Prompt for the password a single time, then keep the sudo timestamp fresh
+# in the background so Homebrew etc. don't re-prompt during long steps.
+header "Administrator access"
+info "You may be asked for your password once."
+sudo -v
+while true; do sudo -n true; sleep 50; kill -0 "$$" 2>/dev/null || exit; done 2>/dev/null &
+SUDO_KEEPALIVE_PID=$!
+trap 'kill "$SUDO_KEEPALIVE_PID" 2>/dev/null' EXIT
+
 # ── Xcode Command Line Tools ───────────────────────────────────────────────────
 header "Xcode Command Line Tools"
 if xcode-select -p &>/dev/null; then
@@ -40,7 +50,8 @@ if command -v brew &>/dev/null; then
   success "Already installed"
 else
   info "Installing..."
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  # NONINTERACTIVE: skip the "Press RETURN" prompt; sudo is already cached above
+  NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
   success "Installed"
 fi
 
@@ -82,12 +93,15 @@ header "Python (uv)"
 header "Node (nvm)"
 "$DOTFILES/node/install.sh"
 
-# ── MCP servers ───────────────────────────────────────────────────────────────
-header "MCP Servers"
-"$DOTFILES/agent/mcp/install.sh"
-
 # ── macOS defaults ────────────────────────────────────────────────────────────
 header "macOS Defaults"
 "$DOTFILES/macos/defaults.sh"
 
-echo "\n${GREEN}${BOLD}Done.${RESET} Open a new shell to pick up all changes.\n"
+echo "\n${GREEN}${BOLD}Done.${RESET} Starting a fresh shell to pick up all changes...\n"
+
+# Replace this process with a new login shell so nvm, node, uv, etc. are
+# available immediately (only when run interactively from a terminal).
+if [[ -t 0 && -t 1 ]]; then
+  kill "$SUDO_KEEPALIVE_PID" 2>/dev/null
+  exec zsh -l
+fi

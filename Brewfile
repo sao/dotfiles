@@ -35,10 +35,7 @@ brew "yq"                # YAML CLI
 
 # ── Runtime management ────────────────────────────────────────────────────────
 brew "uv"                # Python package/env manager
-# nvm installed via agent/envs/node.sh (curl, not brew)
-
-# ── Agent / AI tooling ────────────────────────────────────────────────────────
-brew "node"              # baseline node for npx/uvx MCP servers
+# nvm installed via node/install.sh (curl, not brew)
 
 # ── Productivity ──────────────────────────────────────────────────────────────
 brew "direnv"            # per-directory env vars
